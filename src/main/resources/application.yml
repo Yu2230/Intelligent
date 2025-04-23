@@ -1,0 +1,24 @@
+server:
+  port: 8024
+spring:
+  application:
+    name: IntelligentCustomerServiceSystem
+  mail:
+    username: yu_hl0v1@163.com
+    password: DBdBG33giK2kLwaD
+    host: smtp.163.com
+  datasource:
+    url: jdbc:mysql://localhost:3306/customer_service?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+
