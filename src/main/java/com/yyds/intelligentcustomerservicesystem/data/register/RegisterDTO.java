@@ -20,4 +20,6 @@ public class RegisterDTO {
     private String name;
     @NotNull
     private int sex;
+    @NotNull
+    private String address;
 }

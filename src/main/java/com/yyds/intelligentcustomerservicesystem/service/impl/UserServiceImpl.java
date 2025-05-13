@@ -3,6 +3,7 @@ package com.yyds.intelligentcustomerservicesystem.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.lang.Snowflake;
+import com.yyds.intelligentcustomerservicesystem.constants.PostConstants;
 import com.yyds.intelligentcustomerservicesystem.data.login.LoginDTO;
 import com.yyds.intelligentcustomerservicesystem.data.login.LoginVO;
 import com.yyds.intelligentcustomerservicesystem.service.UserService;
@@ -73,7 +74,10 @@ public class UserServiceImpl implements UserService {
                     .setAvatar(ConfigEnum.DEFAULT_AVATAR.getValue())
                     .setEmail(registerDTO.getEmail())
                     .setCreateTime(LocalDateTime.now())
-                    .setSex(registerDTO.getSex());
+                    .setSex(registerDTO.getSex())
+                    .setPost(PostConstants.DEFAULT_POST.toString())
+                    .setRole(PostConstants.user)
+                    .setAddress(registerDTO.getAddress());
             userMapper.insert(user);
         } else {
             throw new BusinessException(ErrorEnum.REGISTER_ERROR);
@@ -91,12 +95,12 @@ public class UserServiceImpl implements UserService {
     public LoginVO login(LoginDTO loginDTO) {
         User user = userMapper.selectByEmail(loginDTO.getEmail());
         String password = DigestUtils.md5DigestAsHex((ConfigEnum.PASSWORD_SALT.getValue() + loginDTO.getPassword()).getBytes());
+        //int role = user.getRole();
         if (user == null || !password.equals(user.getPassword())) {
             throw new BusinessException(ErrorEnum.LOGIN_ERROR);
         }
         LoginVO loginVO = new LoginVO();
         BeanUtils.copyProperties(user, loginVO);
-        Long userId = user.getUserId();
         String token = JwtUtil.generate(user.getUserId().toString());
         loginVO.setToken(token);
         return loginVO;

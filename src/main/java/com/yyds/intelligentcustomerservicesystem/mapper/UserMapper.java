@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.math.BigDecimal;
+
 @Mapper
 public interface UserMapper {
 
@@ -12,4 +14,7 @@ public interface UserMapper {
     User selectByEmail(String email);
 
     void insert(User user);
+
+    @Select("select * from user where userId = #{userId}")
+    User selectById(Long userId);
 }

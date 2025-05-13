@@ -14,5 +14,8 @@ public class User {
     private String password;
     private int sex;
     private String avatar;
+    private String post;
+    private int role;
+    private String address;
     private LocalDateTime createTime;
 }

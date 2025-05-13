@@ -15,6 +15,9 @@ public class LoginVO {
     private String password;
     private int sex;
     private String avatar;
+    private String post;
+    private String address;
+    private int role;
     private LocalDateTime createTime;
     private String token;
 }

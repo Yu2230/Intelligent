@@ -8,4 +8,5 @@ import lombok.experimental.Accessors;
 public class LoginDTO {
     private String email;
     private String password;
+    private int role;
 }
